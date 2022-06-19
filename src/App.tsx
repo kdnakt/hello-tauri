@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { invoke } from '@tauri-apps/api'
@@ -10,12 +10,16 @@ invoke('greet', { name: 'World' })
   // `invoke` returns a Promise
   .then((response) => console.log(response))
 
-function onClickButton() {
+async function onClickButton(name: string) {
   // console.log(1)
-  alert('hello')
+  // alert('hello')
+  const res = await invoke('greet', { name })
+  alert(res)
 }
 
-function App() {
+
+const App = () => {
+  const [value, setValue] = useState('Akito')
   return (
     <div className="App">
       <header className="App-header">
@@ -31,7 +35,8 @@ function App() {
         >
           Learn React
         </a>
-        <button onClick={onClickButton}>
+        <input value={value} onChange={e => setValue(e.target.value)} ></input>
+        <button onClick={() => onClickButton(value)}>
           click me
         </button>
       </header>
