@@ -10,6 +10,11 @@ invoke('greet', { name: 'World' })
   // `invoke` returns a Promise
   .then((response) => console.log(response))
 
+function onClickButton() {
+  // console.log(1)
+  alert('hello')
+}
+
 function App() {
   return (
     <div className="App">
@@ -26,6 +31,9 @@ function App() {
         >
           Learn React
         </a>
+        <button onClick={onClickButton}>
+          click me
+        </button>
       </header>
     </div>
   );
